@@ -57,8 +57,6 @@ public class FillTest {
         int height = 4;
         Fill f = new Fill(d, width, height);
         int[] act = f.fill(x, y, old, replace);
-        System.out.println("src data:" + Arrays.toString(act));
-        System.out.println("exp data:" + Arrays.toString(exp));
         assertArrayEquals(exp, act);
     }
 }
