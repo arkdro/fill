@@ -29,6 +29,23 @@ public class FillTest {
         return d;
     }
 
+    private int[] data2() {
+        int w = 9;
+        int h = 9;
+        int[] d = {
+            1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 0, 0, 0, 1, 3, 3, 3, 1,
+            1, 0, 0, 0, 1, 3, 3, 3, 1,
+            1, 0, 0, 1, 3, 3, 3, 3, 1,
+            1, 1, 1, 3, 3, 3, 1, 1, 1,
+            1, 3, 3, 3, 3, 1, 0, 0, 1,
+            1, 3, 3, 3, 1, 0, 0, 0, 1,
+            1, 3, 3, 3, 1, 0, 0, 0, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1,
+        };
+        return d;
+    }
+
     public FillTest() {
     }
 
@@ -55,6 +72,26 @@ public class FillTest {
         }
         int width = 4;
         int height = 4;
+        Fill f = new Fill(d, width, height);
+        int[] act = f.fill(x, y, old, replace);
+        assertArrayEquals(exp, act);
+    }
+
+    @Test
+    public void fill_test2() {
+        int[] d = data2();
+        int x = 4;
+        int y = 4;
+        int old = 3;
+        int replace = 2;
+        int[] exp = d.clone();
+        for (int i = 0; i < exp.length; i++) {
+            if (exp[i] == old) {
+                exp[i] = replace;
+            }
+        }
+        int width = 9;
+        int height = 9;
         Fill f = new Fill(d, width, height);
         int[] act = f.fill(x, y, old, replace);
         assertArrayEquals(exp, act);
