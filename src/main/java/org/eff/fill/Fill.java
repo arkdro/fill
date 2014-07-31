@@ -41,11 +41,13 @@ public class Fill {
         for (int i = west; i <= east; i++) {
             set_cell(i, y, replace);
             int north = y - 1;
-            if (get_cell(i, north) == target) {
+            Integer north_cell = get_cell(i, north);
+            if (north_cell != null && north_cell == target) {
                 queue.add(new Point(i, north));
             }
             int south = y + 1;
-            if (get_cell(i, south) == target) {
+            Integer south_cell = get_cell(i, south);
+            if (south_cell != null && south_cell == target) {
                 queue.add(new Point(i, south));
             }
         }
@@ -65,7 +67,8 @@ public class Fill {
         int i = x;
         for (;;) {
             int next_i = i + step;
-            if (get_cell(next_i, y) != target) {
+            Integer cell = get_cell(next_i, y);
+            if (cell == null || cell != target) {
                 break;
             }
             i = next_i;
@@ -82,14 +85,15 @@ public class Fill {
     }
 
     public int[] fill(int x, int y, int target, int replace) {
-        if (get_cell(x, y) != target) {
+        Integer start_cell = get_cell(x, y);
+        if (start_cell == null || start_cell != target) {
             return data;
         }
         queue.add(new Point(x, y));
         while (!queue.isEmpty()) {
             Point n = queue.remove();
-            System.out.println("point n:" + n);
-            if (get_cell(n.x, n.y) == target) {
+            Integer cell = get_cell(n.x, n.y);
+            if (cell != null && cell == target) {
                 process_one_point(n.x, n.y, target, replace);
             }
         }
